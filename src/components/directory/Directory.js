@@ -42,14 +42,9 @@ class Directory extends React.Component {
   render() {
     return (
       <div className='directory-menu'>
-        {this.state.sections.map(({ title, imageUrl, size, id, linkUrl }) => (
-          <MenuItem
-            title={title}
-            imageUrl={imageUrl}
-            size={size}
-            id={id}
-            linkUrl={linkUrl}
-          />
+        {/* you can use spread to have the other props passed into MenuItem as their names. they get passed in like title={title} */}
+        {this.state.sections.map(({ id, ...theRestOfTheState }) => (
+          <MenuItem key={id} {...theRestOfTheState} />
         ))}
       </div>
     )

@@ -2,8 +2,8 @@ import Directory from '../../components/directory/Directory'
 import './Homepage.scss'
 
 //not styled the same for some reason
-const Homepage = () => {
-  return <Directory />
+const Homepage = ({ history }) => {
+  return <Directory history={history} />
 }
 
 export default Homepage
