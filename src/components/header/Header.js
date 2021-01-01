@@ -1,6 +1,7 @@
 import './Header.scss'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
+//https://create-react-app.dev/docs/adding-images-fonts-and-files/ why we use ReactComponent
 
 const Header = () => {
   return (
