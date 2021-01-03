@@ -1,4 +1,5 @@
 import { Switch, Route } from 'react-router-dom'
+import { Component } from 'react'
 import { auth } from './firebase/firebase.utils'
 import './App.css'
 import HomePage from './pages/homepage/Homepage.js'
@@ -6,7 +7,7 @@ import ShopPage from './pages/shop/Shop.js'
 import SignInAndSignUpPage from './pages/sign-in-and-sign-up/SignInAndSignUp'
 import Header from './components/header/Header'
 
-class App extends React.Component() {
+class App extends Component {
   state = { currentUser: null }
 
   // set up an unsubscribe to prevent memory leaks when app component unmounts
@@ -27,7 +28,7 @@ class App extends React.Component() {
   render() {
     return (
       <div>
-        <Header />
+        <Header currentUser={this.state.currentUser} />
         <Switch>
           <Route exact path='/' component={HomePage} />
           <Route path='/shop' component={ShopPage} />
