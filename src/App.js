@@ -16,8 +16,23 @@ class App extends Component {
   componentDidMount() {
     // the user parameter below is the user auth state of firebase which we then set to our app state on mount. also provides session persistence
     // https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15082482#questions
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
-      createUserProfileDocument(user)
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (userAuth) => {
+      if (userAuth) {
+        const userRef = await createUserProfileDocument(userAuth)
+
+        //remember that snapshot is the method that gets us the actual data of the document. snapshot.data() gives us the fields we made ourselves
+        userRef.onSnapshot((snapShot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          })
+        })
+      } else {
+        // keeps currentUser on null if signed out
+        this.setState({ currentUser: userAuth })
+      }
     })
   }
 
