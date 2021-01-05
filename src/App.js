@@ -1,6 +1,6 @@
 import { Switch, Route } from 'react-router-dom'
 import { Component } from 'react'
-import { auth } from './firebase/firebase.utils'
+import { auth, createUserProfileDocument } from './firebase/firebase.utils'
 import './App.css'
 import HomePage from './pages/homepage/Homepage.js'
 import ShopPage from './pages/shop/Shop.js'
@@ -16,8 +16,8 @@ class App extends Component {
   componentDidMount() {
     // the user parameter below is the user auth state of firebase which we then set to our app state on mount. also provides session persistence
     // https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15082482#questions
-    this.unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
-      this.setState({ currentUser: user })
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      createUserProfileDocument(user)
     })
   }
 

@@ -15,6 +15,36 @@ const config = {
   measurementId: 'G-LME7SLJP8X',
 }
 
+//remember that api requests are async so we make below an async func
+//takes authenticated users and makes them into a document in firestore
+//https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15083436#questions 5:08 for query explanation
+export const createUserProfileDocument = async (userAuth, additionalData) => {
+  if (!userAuth) return
+
+  //assign user to userRef variable
+  const userRef = firestore.doc(`/users/${userAuth.uid}`)
+
+  //get info from that userRef
+  const snapShot = await userRef.get()
+
+  if (!snapShot.exists) {
+    //make that document using properties pulled from userAuth
+    const { displayName, email } = userAuth
+    const createdAt = new Date()
+    try {
+      await userRef.set({
+        displayName,
+        email,
+        createdAt,
+        ...additionalData,
+      })
+    } catch (error) {
+      throw new Error('error creating user', error.message)
+    }
+  }
+  return userRef
+}
+
 firebase.initializeApp(config)
 
 export const auth = firebase.auth()
