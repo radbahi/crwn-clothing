@@ -91,5 +91,3 @@ export default class SignUp extends Component {
     )
   }
 }
-
-export default SignUp
