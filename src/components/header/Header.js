@@ -1,5 +1,6 @@
 import './Header.scss'
 import { auth } from '../../firebase/firebase.utils'
+import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 //https://create-react-app.dev/docs/adding-images-fonts-and-files/ why we use ReactComponent
@@ -31,4 +32,9 @@ const Header = ({ currentUser }) => {
   )
 }
 
-export default Header
+//can also use useselector for a quicker more readable way than below
+const mapStateToProps = (state) => ({
+  currentUser: state.user.currentUser,
+})
+
+export default connect(mapStateToProps)(Header)
