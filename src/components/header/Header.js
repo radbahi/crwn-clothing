@@ -3,6 +3,8 @@ import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
+import CartIcon from '../cart-icon/CartIcon'
+import CartDropdown from '../cart-dropdown/CartDropdown'
 //https://create-react-app.dev/docs/adding-images-fonts-and-files/ why we use ReactComponent
 
 const Header = ({ currentUser }) => {
@@ -27,7 +29,9 @@ const Header = ({ currentUser }) => {
             SIGN IN
           </Link>
         )}
+        <CartIcon />
       </div>
+      <CartDropdown />
     </div>
   )
 }
