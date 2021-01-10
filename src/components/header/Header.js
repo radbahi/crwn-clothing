@@ -7,7 +7,7 @@ import CartIcon from '../cart-icon/CartIcon'
 import CartDropdown from '../cart-dropdown/CartDropdown'
 //https://create-react-app.dev/docs/adding-images-fonts-and-files/ why we use ReactComponent
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
   return (
     <div className='header'>
       <Link className='logo-container' to='/'>
@@ -31,14 +31,15 @@ const Header = ({ currentUser }) => {
         )}
         <CartIcon />
       </div>
-      <CartDropdown />
+      {hidden ? null : <CartDropdown />}
     </div>
   )
 }
 
 //can also use useselector for a quicker more readable way than below
-const mapStateToProps = (state) => ({
-  currentUser: state.user.currentUser,
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden,
 })
 
 export default connect(mapStateToProps)(Header)
