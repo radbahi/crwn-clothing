@@ -1,10 +1,13 @@
 import './Header.scss'
 import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { Link } from 'react-router-dom'
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 import CartIcon from '../cart-icon/CartIcon'
 import CartDropdown from '../cart-dropdown/CartDropdown'
+import { selectCartHidden } from '../../redux/cart/cart-selectors'
+import { selectCurrentUser } from '../../redux/user/user-selectors'
 //https://create-react-app.dev/docs/adding-images-fonts-and-files/ why we use ReactComponent
 
 const Header = ({ currentUser, hidden }) => {
@@ -37,9 +40,10 @@ const Header = ({ currentUser, hidden }) => {
 }
 
 //can also use useselector for a quicker more readable way than below
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-  currentUser,
-  hidden,
+//createStructuredSelector automatically passes top level state that we get as our mapStateToProps
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser,
+  hidden: selectCartHidden,
 })
 
 export default connect(mapStateToProps)(Header)
