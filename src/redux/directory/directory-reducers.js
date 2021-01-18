@@ -35,6 +35,7 @@ const INITIAL_STATE = {
   ],
 }
 
+//since no modifications, only return default
 const directoryReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     default:
