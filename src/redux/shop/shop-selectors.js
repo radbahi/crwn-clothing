@@ -9,6 +9,12 @@ export const selectCollections = createSelector(
   (shop) => shop.collections
 )
 
+//made this to translate data object into array
+export const selectCollectionsForPreview = createSelector(
+  [selectCollections],
+  (collections) => Object.keys(collections).map((key) => collections[key])
+)
+
 //find single collection
 //we converted data to object and assigned keys instead of using array so this selector is updated accordingly. data normalization.
 //https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15176016#questions
