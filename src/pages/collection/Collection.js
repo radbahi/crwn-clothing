@@ -3,10 +3,16 @@ import CollectionItem from '../../components/collection-item/CollectionItem'
 import { connect } from 'react-redux'
 import { selectCollection } from '../../redux/shop/shop-selectors'
 
-const CollectionPage = ({ match }) => {
+const CollectionPage = ({ collection }) => {
+  const { title, items } = collection
   return (
     <div className='collection-page'>
-      <h3>Collection pAGE</h3>
+      <h3 className='title'>{title}</h3>
+      <div className='items'>
+        {items.map((item) => (
+          <CollectionItem key={item.id} item={item} />
+        ))}
+      </div>
     </div>
   )
 }
