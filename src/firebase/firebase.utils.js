@@ -4,6 +4,8 @@ import firebase from 'firebase/app' //...initialize firebase
 import 'firebase/firestore' //...use firebase database
 import 'firebase/auth' //...use firebase authentication
 
+//MUST ADD DOMAIN TO AUTHENTICATION IN FIREBASE DASHBOARD IF PROJECT IS DEPLOYED ONLINE
+
 // below object pulled from firebase project website
 const config = {
   apiKey: 'AIzaSyCrsDKvBlvW4SrRoQ__U2PqFmYJXAuE5_k',
