@@ -35,6 +35,13 @@ const GoogleSignInStyles = css`
     }
   }
 `
+const getButtonStyles = (props) => {
+  if (props.isGoogleSignIn) {
+    return GoogleSignInStyles
+  }
+
+  return props.inverted ? InvertedButtonStyles : ButtonStyles
+}
 
 const CustomButtonContainer = styled.button`
   min-width: 165px;
@@ -59,14 +66,6 @@ const CustomButtonContainer = styled.button`
 
   ${getButtonStyles}
 `
-
-const getButtonStyles = (props) => {
-  if (props.isGoogleSignIn) {
-    return GoogleSignInStyles
-  }
-
-  return props.inverted ? InvertedButtonStyles : ButtonStyles
-}
 
 const CustomButton = ({ children, ...props }) => {
   return <CustomButtonContainer {...props}>{children}</CustomButtonContainer>
