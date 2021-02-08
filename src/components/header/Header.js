@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components' //https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15185736#notes
+import styled from 'styled-components' //https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15185736#notes
 import { auth } from '../../firebase/firebase.utils'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -32,17 +32,9 @@ const OptionsContainer = styled.div`
   justify-content: flex-end;
 `
 
-const OptionContainerStyles = css`
+const OptionLink = styled(Link)`
   padding: 10px 15px;
   cursor: pointer;
-`
-
-const OptionLink = styled(Link)`
-  ${OptionContainerStyles}
-`
-
-const OptionDiv = styled.div`
-  ${OptionContainerStyles}
 `
 
 const Header = ({ currentUser, hidden }) => {
@@ -55,7 +47,9 @@ const Header = ({ currentUser, hidden }) => {
         <OptionLink to='/shop'>SHOP</OptionLink>
         <OptionLink to='/shop'>CONTACT</OptionLink>
         {currentUser ? (
-          <OptionDiv onClick={() => auth.signOut()}>SIGN OUT</OptionDiv>
+          <OptionLink as='div' onClick={() => auth.signOut()}>
+            SIGN OUT
+          </OptionLink>
         ) : (
           <OptionLink to='/signin'>SIGN IN</OptionLink>
         )}
