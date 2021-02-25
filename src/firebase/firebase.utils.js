@@ -62,6 +62,22 @@ export const addCollectionAndDocuments = async (
   return await batch.commit()
 }
 
+//https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15234798#questions/11444182
+export const convertCollectionsSnapshotToMap = (collections) => {
+  const transformedCollection = collections.docs.map((doc) => {
+    const { title, items } = doc.data()
+
+    // we use encodeURI to make sure any special characters are usable in a hyperlink
+    return {
+      routeName: encodeURI(title.toLowerCase()),
+      ID: doc.id,
+      title,
+      items,
+    }
+  })
+  console.log(transformedCollection)
+}
+
 firebase.initializeApp(config)
 
 export const auth = firebase.auth()
