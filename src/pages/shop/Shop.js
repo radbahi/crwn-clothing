@@ -6,6 +6,8 @@ import {
   convertCollectionsSnapshotToMap,
 } from '../../firebase/firebase.utils'
 import { Route } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { updateCollections } from '../../redux/shop/shop-actions'
 
 //https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15175184#questions
 // https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15234798#questions/11444182
@@ -15,10 +17,12 @@ class ShopPage extends React.Component {
   unsubscribeFromSnapshot = null
 
   componentDidMount() {
+    const { updateCollections } = this.props
     const collectionRef = firestore.collection('collections')
     //whenever collectionRef updates or code gets run for the first time, below will send us the array
     collectionRef.onSnapshot(async (snapshot) => {
-      convertCollectionsSnapshotToMap(snapshot)
+      const collectionsMap = convertCollectionsSnapshotToMap(snapshot)
+      updateCollections(collectionsMap)
     })
   }
 
@@ -36,4 +40,9 @@ class ShopPage extends React.Component {
   }
 }
 
-export default ShopPage
+const mapDispatchToProps = (dispatch) => ({
+  updateCollections: (collectionsMap) =>
+    dispatch(updateCollections(collectionsMap)),
+})
+
+export default connect(null, mapDispatchToProps)(ShopPage)
