@@ -12,15 +12,15 @@ export const selectCollections = createSelector(
 //made this to translate data object into array
 export const selectCollectionsForPreview = createSelector(
   [selectCollections],
-  (collections) => Object.keys(collections).map((key) => collections[key])
-)
+  (collections) =>
+    collections ? Object.keys(collections).map((key) => collections[key]) : []
+) // check if collections is null or not in state
 
 //find single collection
 //we converted data to object and assigned keys instead of using array so this selector is updated accordingly. data normalization.
 //https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15176016#questions
 export const selectCollection = memoize((collectionUrlParam) =>
-  createSelector(
-    [selectCollections],
-    (collections) => collections[collectionUrlParam]
+  createSelector([selectCollections], (collections) =>
+    collections ? collections[collectionUrlParam] : null
   )
 )
