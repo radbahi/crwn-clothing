@@ -1,4 +1,4 @@
-import { SpinnerContainer, SpinnerOverlay } from './with-spinner.styles'
+import { SpinnerContainer, SpinnerOverlay } from './WithSpinner.styles'
 
 //https://www.udemy.com/course/complete-react-developer-zero-to-mastery/learn/lecture/15190698#questions
 const WithSpinner = (WrappedComponent) => {
